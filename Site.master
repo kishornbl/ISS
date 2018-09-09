@@ -1,0 +1,135 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Clockstyle.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="Scripts/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/moment.min.js" type="text/javascript"></script>
+    <script src="Scripts/script.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="Form1" runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1 >
+               
+                    <img id="Img1" src="~/image/nationalbank logo.png" height="80"  runat="server"  style = "float:left;" /> 
+                    
+                    
+                    <div id="clock" class="light" style = "float:right;">
+			                <div class="display">
+				                <div class="weekdays"></div>
+				                <div class="ampm"></div>
+				                <div class="alarm"></div>
+				                <div class="digits"></div>
+			                </div>
+		                </div>                      
+                </h1>
+               		
+                <%--<div class="loginDisplay" align="right" style="height:30px" >--%>
+                    
+            <%--</div>--%>
+                   <center style ="float:left; width: 100%;">          
+                   <h2>ISS Report Management</h2>
+                   <div style="text-align:right; margin:0px 5px 5px 0px;">
+                   <asp:Label ID="lblHello" Text="Welcome!" runat="server" Height="17px" Font-Size="10pt"
+                    ForeColor="#000"></asp:Label>
+                     <asp:Label ID= "lblUser" runat="server" Height="17px" Font-Bold="True" 
+                    ForeColor="#000"></asp:Label>
+                    <asp:Label ID="lblDivOne" Text=" | " runat="server" Height="17px" Font-Bold="True" 
+                    ForeColor="#000"></asp:Label>
+                     <asp:Label ID= "lblBranch" runat="server" Height="17px" Font-Bold="True" 
+                    ForeColor="#000"></asp:Label>
+                    <asp:Label ID="lblDivTwo" Text=" | " runat="server" Height="17px" Font-Bold="True" 
+                    ForeColor="#000"></asp:Label>
+                    <asp:LinkButton ID="btnSignOut" CssClass="style1" runat="server"
+                   Font-Names="Tahoma" Font-Size="9pt" Text="Log Out" Font-Bold="True" 
+                     ForeColor="#E3525B" CausesValidation="false" onclick="btnSignOut_Click"></asp:LinkButton>
+                     </div>
+                 </center>
+            </div>
+
+           
+            <div class="hideSkiplink"  >
+            <%--<div class= "menu">--%>
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                       <%-- <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>--%>
+                        <asp:MenuItem Text="Admin" Value="File">
+                               <%-- <asp:MenuItem NavigateUrl="~/CreateUser.aspx" Text="User Creation"/>
+                                <asp:MenuItem NavigateUrl="~/UserModification.aspx" Text="User Modification"/>
+                                <asp:MenuItem NavigateUrl="~/ResetPassword.aspx" Text="Reset Pass & Delete Autho"/>  --%>                                                           
+                                <asp:MenuItem NavigateUrl="~/TimeExtension.aspx" Text="Software Time Extension"/>
+                                <%--<asp:MenuItem NavigateUrl="~/Transaction.aspx?value=Branch Admin" Text="Monitoring Authorization"/>--%>
+                                <%--<asp:MenuItem NavigateUrl="~/ACCEP_TRANSACTION_MODI.aspx?value=Branch Admin" Text="Acceptance Authorization"/>--%>
+                        </asp:MenuItem>
+                       <%-- <asp:MenuItem Text="File Maintenance" Value="File">
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Region Information"/>
+                                <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Branch Maintenance"/>
+                        </asp:MenuItem>--%>
+                          <asp:MenuItem Text="Transaction" Value="File">
+                            <asp:MenuItem Text="Monitoring" Value="File">
+                                <%--<asp:MenuItem NavigateUrl="~/Transaction_Monitoring_Entry.aspx" Text="Monitoring Entry"/>--%>
+                                <asp:MenuItem NavigateUrl="~/Transaction.aspx?value=Branch" Text="Monitoring Modification"/>
+                            </asp:MenuItem>
+                             <asp:MenuItem Text="Acceptance" Value="File">
+                                <asp:MenuItem NavigateUrl="~/ACCEP_TRANSACTION.aspx" Text="Acceptance Entry"/>
+                                <asp:MenuItem NavigateUrl="~/ACCEP_TRANSACTION_MODI.aspx?value=Branch" Text="Acceptance Modification"/>
+                             </asp:MenuItem>                                  
+                        </asp:MenuItem>
+                          <asp:MenuItem Text="Report" Value="File">
+                                <asp:MenuItem Text="Monitoring" Value="File">
+                                        <asp:MenuItem NavigateUrl="~/Report.aspx?value=BranchMonitoring" Text="Branch Wise"/>                
+                                        <asp:MenuItem NavigateUrl="~/Report.aspx?value=HOMonitoring" Text="HeadOffice Wise"/>
+                                        <asp:MenuItem NavigateUrl="~/ItemWiseReport.aspx?value=COA" Text="COA Description Wise"/>  
+                                        <asp:MenuItem NavigateUrl="~/AuthoBranchList.aspx?value=AUTHO" Text="Authorized Branch List"/>  
+                                                      
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Acceptance" Value="File">
+                                        <asp:MenuItem NavigateUrl="~/Report.aspx?value=BranchAcceptance" Text="Branch Wise"/>                
+                                        <asp:MenuItem NavigateUrl="~/Report.aspx?value=HOAcceptance" Text="HeadOffice Wise"/>                
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Audit Report" Value="File">
+                                        <asp:MenuItem NavigateUrl="~/ActiveUser.aspx" Text="Active User List"/>                
+                                        <asp:MenuItem NavigateUrl="~/InActiveUser.aspx" Text="InActive User List"/>                
+                                </asp:MenuItem>                             
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Security" Value="File">
+                                <asp:MenuItem NavigateUrl="~/Change_Password.aspx" Text="Change Password"/>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="System" Value="File">
+                                  <asp:MenuItem NavigateUrl="~/DataFromGL.aspx" Text="Import GLPL Data"/>
+                                <%--<asp:MenuItem NavigateUrl="~/DatabaseBackup.aspx" Text="Database Backup"/>--%>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Help" Value="File">
+                            <asp:MenuItem NavigateUrl="~/image/User Manual_ISS.pdf" target="_blank" Text="User Manual"/>
+                            <asp:MenuItem NavigateUrl="~/image/Line_Combination.pdf" target="_blank" Text="Input Combination"/>
+                        </asp:MenuItem>   
+                        <asp:MenuItem NavigateUrl="~/ContactUs.aspx" Text="Contact Us"/>  
+                    </Items>
+                </asp:Menu>
+                <%--</div>--%>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+        <span style = "color:#FFFFFF">
+        COPYRIGHT 2015 - NBL SOFTWARE DEVELOPMENT TEAM. ALL RIGHT RESERVED.
+        </span>
+
+    </div>
+    </form>
+</body>
+</html>

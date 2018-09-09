@@ -1,0 +1,81 @@
+﻿/* Version:01.01
+ Author: Kishor Kumar Saha
+ Opearation: Create User 
+ create date: 25.07.2015
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+//using Microsoft.SqlServer.Management.Smo;
+//using Microsoft.SqlServer.Management.Common;
+
+public partial class DatabaseBackup : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            string UserId = Session["UserId"].ToString().Trim();
+            if (UserId == null)
+            {
+                Response.Redirect(ConfigurationManager.AppSettings["serverAddress"]);
+            }
+            if (UserId != "HOIT" && UserId != "ITSUPPORT")
+            {
+                Response.Redirect("Default2.aspx");
+            }
+        }
+    }
+    protected void btnBackup_Click(object sender, EventArgs e)
+    {
+        BackupSqlDatabase("ISS", "sa", "sys123", "172.31.1.65\\MSSQLSERVER12", "D:\\Database BackUp\\LocalServer\\ISS_" + DateTime.Now.ToString("MMddyyyy_hhmmss") + ".bak", "172.31.1.189\\D:\\Database BackUp\\LiveServer\\ISS_" + DateTime.Now.ToString("MMddyyyy_hhmmss") + ".bak");
+        string message = "Database Backup Successfully done!";
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.Append("<script type = 'text/javascript'>");
+        sb.Append("window.onload=function(){");
+        sb.Append("alert('");
+        sb.Append(message);
+        sb.Append("')};");
+        sb.Append("</script>");
+        ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+    }
+    public void BackupSqlDatabase(String databaseName, String userName, String password, String serverName, String destinationPath, String destinationPathOne)
+    {
+        Backup sqlBackup = new Backup();
+
+        sqlBackup.Action = BackupActionType.Database;
+        sqlBackup.BackupSetDescription = "ArchiveDataBase:" + DateTime.Now.ToShortDateString();
+        sqlBackup.BackupSetName = "Archive";
+
+        sqlBackup.Database = databaseName;
+
+        BackupDeviceItem deviceItem = new BackupDeviceItem(destinationPath, DeviceType.File);
+        //BackupDeviceItem deviceItemOne = new BackupDeviceItem(destinationPathOne, DeviceType.File);
+        ServerConnection connection = new ServerConnection(serverName, userName, password);
+        Server sqlServer = new Server(connection);
+
+        Database db = sqlServer.Databases[databaseName];
+
+        sqlBackup.Initialize = true;
+        sqlBackup.Checksum = true;
+        sqlBackup.ContinueAfterError = true;
+
+        sqlBackup.Devices.Add(deviceItem);
+        //sqlBackup.Devices.Add(deviceItemOne);
+        sqlBackup.Incremental = false;
+
+        sqlBackup.ExpirationDate = DateTime.Now.AddDays(3);
+        sqlBackup.LogTruncation = BackupTruncateLogType.Truncate;
+
+        sqlBackup.FormatMedia = false;
+
+        sqlBackup.SqlBackup(sqlServer);
+    }
+}

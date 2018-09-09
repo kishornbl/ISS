@@ -1,0 +1,18 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="DatabaseBackup.aspx.cs" Inherits="DatabaseBackup" %>
+
+<asp:Content ID="Header" ContentPlaceHolderID="HeadContent" Runat="Server">
+</asp:Content>
+<asp:Content ID="Body" ContentPlaceHolderID="MainContent" Runat="Server">
+<div style = " margin-top: 40px;">
+</br>
+<table width="auto" align="center" border = "1px solid">
+    <tr>
+        <td><asp:Label ID="lblBackup" runat="server" Font-Bold="true" Text="Take Database Backup"></asp:Label></td>
+        <td><asp:Button ID="btnBackup" runat="server" Text="Database Backup" 
+            onclick="btnBackup_Click" BackColor="#003366" BorderColor="#00CCFF" ForeColor="White" Font-Bold="true"
+        BorderWidth="2px" Width="150px" CssClass="forBackup" Height="30px" /></td>
+    </tr>
+        </table>
+        </div>
+</asp:Content>
+
