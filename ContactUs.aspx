@@ -23,6 +23,7 @@
             Website: http://www.nblbd.com<br />
             E-mail:  itd@nblbd.com
 			Alternative Email: kishor.it@nblbd.com
+            E-mail:najim.it@nblbd.com
             </p>
             </center>
         </div>
