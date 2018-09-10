@@ -22,8 +22,7 @@
             Telephone: 9565818, 9565887, 9577846<br />
             Website: http://www.nblbd.com<br />
             E-mail:  itd@nblbd.com
-			Alternative Email: kishor.it@nblbd.com
-            E-mail:najim.it@nblbd.com
+			Alternative Email: kishor.it@nblbd.com            
             </p>
             </center>
         </div>
