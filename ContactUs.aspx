@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ContactUs.aspx.cs" Inherits="ContactUs" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ContactUs.aspx.cs" Inherits="ContactUs" %>
 
 <asp:Content ID="Head" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -23,7 +23,7 @@
             Website: http://www.nblbd.com<br />
             E-mail:  itd@nblbd.com
 			Alternative Email: kishor.it@nblbd.com
-            E-mail:najim.it@nblbd.com
+            E-mail:asaduzzaman.it@nblbd.com
             </p>
             </center>
         </div>
